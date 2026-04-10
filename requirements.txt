@@ -1,0 +1,9 @@
+# Core Vision and AI
+mediapipe
+opencv-python
+
+# Math and Logic
+numpy
+
+# System Utilities
+protobuf
