@@ -44,7 +44,7 @@ def calibrate_posture():
     options = PoseLandmarkerOptions(
         base_options=BaseOptions(
             model_asset_path=MODEL_PATH,
-            delegate=BaseOptions.Delegate.GPU 
+            delegate=BaseOptions.Delegate.CPU 
         ),
         running_mode=VisionRunningMode.LIVE_STREAM,
         result_callback=process_calibration_result
@@ -95,7 +95,12 @@ state = PostureState()
 def trigger_alert():
     if platform.system() == "Windows":
         import winsound
-        winsound.PlaySound(sound_file, winsound.SND_FILENAME | winsound.SND_ASYNC)
+        winsound.PlaySound(ALERT_SOUND, winsound.SND_FILENAME | winsound.SND_ASYNC)
+        try:
+            from win11toast import toast
+            toast('Posture Alert', 'Please sit up straight!')
+        except:
+            pass
     else:
         subprocess.Popen(["paplay", ALERT_SOUND])
         subprocess.Popen(["notify-send", "Posture Alert", "Please sit up straight!", "--urgency=critical"])
@@ -147,7 +152,7 @@ else:
 options = PoseLandmarkerOptions(
     base_options=BaseOptions(
         model_asset_path=MODEL_PATH,
-        delegate=BaseOptions.Delegate.GPU 
+        delegate=BaseOptions.Delegate.CPU 
     ),
     running_mode=VisionRunningMode.LIVE_STREAM,
     result_callback=process_result
