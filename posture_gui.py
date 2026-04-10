@@ -12,8 +12,8 @@ import platform
 
 CONFIG_FILE = "posture_config.json"
 VideoCapDevice = 0
-ALERT_SOUND = "mixkit-digital-quick-tone-2866.wav"
-MODEL_PATH = '/media/rahul/Rahul2TBHarddisk/Documents/Projects/Python/Sloutch Detector/pose_landmarker_heavy.task'
+ALERT_SOUND = "alert.wav"
+MODEL_PATH = 'pose_landmarker_heavy.task'
 POSTURE_THRESHOLD = 0.15 
 TIME_THRESHOLD = 3.0      
 
@@ -62,8 +62,8 @@ def calibrate_posture():
                 if not ret: break
                 
                 current_time_ms = int(time.time() * 1000) - start_time_ms
-                frame = cv2.rotate(frame, cv2.ROTATE_180)
-                frame = cv2.flip(frame, 1)
+                #frame = cv2.rotate(frame, cv2.ROTATE_180)
+                #frame = cv2.flip(frame, 1)
                 
                 # UX Improvement: Show calibration progress
                 cv2.putText(frame, f"Calibrating: {len(gaps)}/100", (10, 50), 
@@ -162,8 +162,8 @@ with PoseLandmarker.create_from_options(options) as landmarker:
             if not ret: break
             
             current_time_ms = int(time.time() * 1000) - start_time_ms
-            frame = cv2.rotate(frame, cv2.ROTATE_180)
-            frame = cv2.flip(frame, 1)
+            #frame = cv2.rotate(frame, cv2.ROTATE_180)
+            #frame = cv2.flip(frame, 1)
             
             rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb_frame)
