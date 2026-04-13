@@ -7,3 +7,4 @@ numpy
 
 # System Utilities
 protobuf
+customtkinter

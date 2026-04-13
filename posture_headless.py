@@ -56,7 +56,6 @@ def calibrate_posture():
         cap = cv2.VideoCapture(VideoCapDevice)
         start_time_ms = int(time.time() * 1000)
         try:
-            # FIX 3: Wait until the async callbacks have populated 100 items
             while len(gaps) < 100:
                 ret, frame = cap.read()
                 if not ret: break
@@ -105,7 +104,6 @@ def process_result(result: vision.PoseLandmarkerResult, output_image: mp.Image, 
     if result.pose_landmarks:
         landmarks = result.pose_landmarks[0]
         
-        # FIX 2: Use the exact same math as calibration (Normalized Ratio)
         vertical_gap = landmarks[11].y - landmarks[7].y
         shoulder_width = math.sqrt((landmarks[11].x - landmarks[12].x)**2 + 
                                     (landmarks[11].y - landmarks[12].y)**2)
